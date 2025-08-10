@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -15,202 +16,163 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class GameChooseList extends Activity
-{
+public class GameChooseList extends Activity {
+
     GridView chooseGV;
-    String name;
-    String sname;
-    int cnt = 0;
-    int i = 0;
-    int ret = 0;
-    String fileType;
+    protected String resourceType;
+    ChooseGVAdapter adapter;
     Context ctx;
     int BUFFER_SIZE = 50;
-    int n = 0;
-
+    @Override
+    public void setContentView(int layoutResID) {
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(layoutResID, null);
+        resourceType = (String) view.getTag();
+        Log.d("cfh", "GameChooselist = " + resourceType);
+        super.setContentView(view);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gamechooselist);
         ctx = getApplication();
-        Main.list = new ArrayList<String>();
+        View rootView = findViewById(android.R.id.content).getRootView();
+        Object tag = rootView.getTag();
 
-        // 是否有完過這個遊戲 0.  沒有完過 1. 有錯 2. 全對
-        Main.myArrayCh = new ArrayList<String>();
-        Main.myArrayChInf = new ArrayList<String>();
-        Main.choosereadjson = 0;
-        Main.choosebackPressed = 0;
+        if (tag != null) {
+            Log.d("LayoutTag", "目前使用的 layout 是: " + tag.toString());
+        } else {
+            Log.d("LayoutTag", "這個 layout 沒有設定 tag");
+        }
 
-        fileType = "UTF-8";
-        for (i = 0; i < 30 ; i++)
-        {
-            if (Main.setcn == false)
-                name = "ce" + i + ".txt";
-            else
-                name = "cse" + i + ".txt";
-
-            if (name != null)
-            {
-                sname = name;
-                   //  Log.d("cfh", "open to see Error sname = " + sname);
-                    try {
-                        InputStream inputStream = ctx.
-                                openFileInput(sname);
-                        if (inputStream != null) {
-
-                            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, fileType), BUFFER_SIZE);
-                            String str = "";
-                            while ((str = br.readLine()) != null) {
-                                //  Log.d("cfh", "str = " + str);
-                                ret = Integer.parseInt(str);
-                           //     Log.d("cfh", "began ret = " + ret + " " + sname);
-                                // 1.   全對
-                                if (ret == 1)
-                                {
-
-                                 //   Log.d("cfh", "1. ret = " + ret + " " + sname);
-                                    Main.list.add("1");
-                                    Main.myArrayCh.add("1");
-                                    Main.myArrayChInf.add("1");
-                                    Main.saveindx = i;
-                                }
-                                else
-                                {
-                                    // 2. 有錯
-                                    if (ret == 2)
-                                    {
-                                   //     Log.d("cfh", "2. ret = " + ret + " " + sname);
-                                        Main.list.add("2");
-                                        Main.myArrayCh.add("1");
-                                        Main.myArrayChInf.add("2");
-                                        Main.saveindx = i;
-                                        Main.saveerr = ret;
-                                    }
-                                    else
-                                    {
-                                   //     Log.d("cfh", "3. ret = " + ret + " " + sname);
-                                        Main.myArrayCh.add("1");
-                                        Main.myArrayChInf.add("3");
-                                        Main.saveerr = ret;
-                                        Main.saveindx = i;
-                                    }
-                                }
-                            }
-                            br.close();
-                        }
-                        // if NULL
-
-                    }
-                    catch (IOException e)
-                    {
-                        if (i == 0 )
-                        {
-                            Main.list.add("0");
-                            Main.myArrayCh.add("1");
-                            Main.myArrayChInf.add("0");
-                         //   Log.e("cfh", "File write failed: " + e.toString());
-                        }
-                        else
-                        {
-                            n =  i - 1;
-                         //   Log.d("cfh", "n  = " + n + " i " + i + " sidx " + Main.saveindx);
-                            if ( n == Main.saveindx)
-                            {
-                                if ( Main.saveerr == 3)
-                                {
-                                  //  Log.e("cfh", "File index =  " + i + " n = " + n);
-                                    Main.myArrayCh.add("1");
-                                    Main.myArrayChInf.add("0");
-                                }
-                                else
-                                {
-                                    if (Main.saveerr == 2)
-                                    {
-                                        Main.myArrayCh.add("1");
-                                        Main.myArrayChInf.add("0");
-                                    }
-                                    else
-                                    {
-                                      //  Log.e("cfh", "error  =  " + Main.saveerr);
-                                        Main.myArrayCh.add("0");
-                                    }
-                                }
-                            }
-                            else
-                            {
-                               // Log.e("cfh", "n = " + n );
-                                Main.myArrayCh.add("0");
-
-                            }
-                        }
-                    } // try
-                }
-        }  // for loop 繁體
 
         chooseGV = findViewById(R.id.idchoose);
-        final ArrayList<ChooseModel> chooseModelArrayList = new ArrayList<ChooseModel>();
 
-        chooseModelArrayList.add(new ChooseModel("0", R.drawable.choose, R.drawable.num01,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("1", R.drawable.choose, R.drawable.num02,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("2", R.drawable.choose, R.drawable.num03,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("3", R.drawable.choose, R.drawable.num04,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("4", R.drawable.choose, R.drawable.num05,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("5", R.drawable.choose, R.drawable.num06,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("6", R.drawable.choose, R.drawable.num07,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("7", R.drawable.choose, R.drawable.num08,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("8", R.drawable.choose, R.drawable.num09,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("9", R.drawable.choose, R.drawable.num10,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("10", R.drawable.choose, R.drawable.num11,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("11", R.drawable.choose, R.drawable.num12,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("12", R.drawable.choose, R.drawable.num13,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("13", R.drawable.choose, R.drawable.num14,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("14", R.drawable.choose, R.drawable.num15,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("15", R.drawable.choose, R.drawable.num16,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("16", R.drawable.choose, R.drawable.num17,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("17", R.drawable.choose, R.drawable.num18,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("18", R.drawable.choose, R.drawable.num19,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("19", R.drawable.choose, R.drawable.num20,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("20", R.drawable.choose, R.drawable.num21,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("21", R.drawable.choose, R.drawable.num22,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("22", R.drawable.choose, R.drawable.num23,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("23", R.drawable.choose, R.drawable.num24,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("24", R.drawable.choose, R.drawable.num25,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("25", R.drawable.choose, R.drawable.num26,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("26", R.drawable.choose, R.drawable.num27,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("27", R.drawable.choose, R.drawable.num28,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("28", R.drawable.choose, R.drawable.num29,R.mipmap.err));
-        chooseModelArrayList.add(new ChooseModel("29", R.drawable.choose, R.drawable.num30,R.mipmap.err));
-
-        ChooseGVAdapter adapter = new ChooseGVAdapter(this, chooseModelArrayList);
+        // ✅ 建立 Adapter
+        final ArrayList<ChooseModel> chooseModelArrayList = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            chooseModelArrayList.add(new ChooseModel(
+                    String.valueOf(i),
+                    R.drawable.choose,
+                    getNumDrawable(i),
+                    R.mipmap.err
+            ));
+        }
+        adapter = new ChooseGVAdapter(this, chooseModelArrayList);
         chooseGV.setAdapter(adapter);
+
+        // ✅ 載入初始狀態
+        loadGameStatus();
+
         chooseGV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent,
                                     View view, int position, long id) {
                 Main.cnum = position;
-                if  (Main.myArrayCh.get(position) == "1" )
-                {
+                // ✅ 只能開啟已解鎖的遊戲
+                if ("1".equals(Main.myArrayCh.get(position))) {
                     Intent intent = new Intent(GameChooseList.this, ChooseGridList.class);
-                    //  intent.putExtra("image", chooseModelArrayList[position]); // put image data in Intent
-                    startActivity(intent); // start Intent
+                    startActivity(intent);
                 }
             }
         });
     }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        finish();
 
-    }
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        //  Log.d("CFH", "GameTableList" +  " NewBtn = " + Main.GameBtn);
-        Intent main = new Intent(ctx, GameLevel.class);
-        startActivity(main);
-        finish();
-        return;
+    protected void onResume() {
+        super.onResume();
+        Log.d("cfh", "✅ onResume: 重新載入遊戲狀態");
+        loadGameStatus();
+        adapter.notifyDataSetChanged();
     }
 
+    private void loadGameStatus() {
+        Main.myArrayCh = new ArrayList<>();
+        Main.myArrayChInf = new ArrayList<>();
+
+        for (int i = 0; i < 30; i++) {
+            String name = (Main.setcn) ? "cse" + i + ".txt" : "ce" + i + ".txt";
+            try {
+                InputStream inputStream = ctx.openFileInput(name);
+                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), BUFFER_SIZE);
+                String line;
+                int ret = 0;
+                while ((line = br.readLine()) != null) {
+                    ret = Integer.parseInt(line);
+                }
+                br.close();
+
+                // ✅ 更新狀態
+                if (ret == 1) { // 全對
+                    Main.myArrayCh.add("1");
+                    Main.myArrayChInf.add("1");
+                    Main.saveindx = i;
+                } else if (ret == 2) { // 有錯
+                    Main.myArrayCh.add("1");
+                    Main.myArrayChInf.add("2");
+                    Main.saveindx = i;
+                    Main.saveerr = ret;
+                } else {
+                    Main.myArrayCh.add("1");
+                    Main.myArrayChInf.add("3");
+                    Main.saveerr = ret;
+                    Main.saveindx = i;
+                }
+
+            } catch (IOException e) {
+                if (i == 0) {
+                    // ✅ 第一個遊戲預設解鎖
+                    Main.myArrayCh.add("1");
+                    Main.myArrayChInf.add("0");
+                } else {
+                    // ✅ 其他遊戲預設鎖住
+                    if (i == Main.saveindx + 1) {
+                        Main.myArrayCh.add("1");
+                        Main.myArrayChInf.add("0");
+                    } else {
+                        Main.myArrayCh.add("0");
+                        Main.myArrayChInf.add("0");
+                    }
+                }
+            }
+            Log.d("cfh", "遊戲 " + i + " 狀態: " + Main.myArrayChInf.get(i));
+        }
+    }
+
+    private int getNumDrawable(int index) {
+        switch (index) {
+            case 0: return R.drawable.num01;
+            case 1: return R.drawable.num02;
+            case 2: return R.drawable.num03;
+            case 3: return R.drawable.num04;
+            case 4: return R.drawable.num05;
+            case 5: return R.drawable.num06;
+            case 6: return R.drawable.num07;
+            case 7: return R.drawable.num08;
+            case 8: return R.drawable.num09;
+            case 9: return R.drawable.num10;
+            case 10: return R.drawable.num11;
+            case 11: return R.drawable.num12;
+            case 12: return R.drawable.num13;
+            case 13: return R.drawable.num14;
+            case 14: return R.drawable.num15;
+            case 15: return R.drawable.num16;
+            case 16: return R.drawable.num17;
+            case 17: return R.drawable.num18;
+            case 18: return R.drawable.num19;
+            case 19: return R.drawable.num20;
+            case 20: return R.drawable.num21;
+            case 21: return R.drawable.num22;
+            case 22: return R.drawable.num23;
+            case 23: return R.drawable.num24;
+            case 24: return R.drawable.num25;
+            case 25: return R.drawable.num26;
+            case 26: return R.drawable.num27;
+            case 27: return R.drawable.num28;
+            case 28: return R.drawable.num29;
+            case 29: return R.drawable.num30;
+            default: return R.drawable.num01;
+        }
+    }
 }
+
