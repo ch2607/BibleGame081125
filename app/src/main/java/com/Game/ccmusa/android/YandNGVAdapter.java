@@ -231,11 +231,14 @@ public class YandNGVAdapter extends ArrayAdapter<YandNModel>
                 }
                 else
                 {
-                    Glide.with(getContext())
-                            .load(R.mipmap.allerr)
-                            .into(error);
-                    error.setVisibility(View.VISIBLE);
+                    if ( Main.myArrayYandNInf.get(position) == "3") {
+                        Glide.with(getContext())
+                                .load(R.mipmap.allerr)
+                                .into(error);
+                        error.setVisibility(View.VISIBLE);
+                    }
                 }
+
             }
         }
         else

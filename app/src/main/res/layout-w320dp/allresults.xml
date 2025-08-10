@@ -24,7 +24,7 @@
         android:layout_marginStart="130dp"
         android:layout_marginTop="70dp"
         android:text="全部答對經節:"
-        android:textSize="20sp" />
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/imageError"
@@ -43,7 +43,7 @@
         android:layout_marginStart="130dp"
         android:layout_marginTop="100dp"
         android:text="答錯四個字經節:"
-        android:textSize="20sp" />
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/imageErrAll"
@@ -61,7 +61,7 @@
         android:layout_marginStart="130dp"
         android:layout_marginTop="130dp"
         android:text="答錯八個字經節:"
-        android:textSize="20sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/textTitle"
@@ -72,7 +72,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/easy_label"
         android:textColor="@color/puzzle_games"
-        android:textSize="30sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textTotal"
@@ -81,7 +81,7 @@
         android:layout_marginStart="130dp"
         android:layout_marginTop="155dp"
         android:text="尚未完的經節："
-        android:textSize="20sp" />
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/mimageOk"
@@ -102,7 +102,7 @@
         android:layout_marginStart="130dp"
         android:layout_marginTop="240dp"
         android:text="全部答對經節:"
-        android:textSize="20sp" />
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/mimageErr"
@@ -121,7 +121,7 @@
         android:layout_marginStart="130dp"
         android:layout_marginTop="275dp"
         android:text="答錯四個字經節:"
-        android:textSize="20sp" />
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/mimageErrAll"
@@ -140,7 +140,7 @@
         android:layout_marginStart="130dp"
         android:layout_marginTop="306dp"
         android:text="答錯八個字經節:"
-        android:textSize="20sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/mtextTitle"
@@ -151,7 +151,7 @@
         android:layout_marginTop="190dp"
         android:text="@string/medium_label"
         android:textColor="@color/puzzle_games"
-        android:textSize="30sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/mtextTotal"
@@ -160,7 +160,7 @@
         android:layout_marginStart="130dp"
         android:layout_marginTop="340dp"
         android:text="尚未完的經節："
-        android:textSize="20sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/htextTile"
@@ -171,7 +171,7 @@
         android:layout_marginTop="390dp"
         android:text="@string/hard_label"
         android:textColor="@color/puzzle_games"
-        android:textSize="30sp" />
+        android:textSize="20sp" />
 
     <ImageView
         android:id="@+id/imageView24"
@@ -193,7 +193,7 @@
         android:layout_marginStart="130dp"
         android:layout_marginTop="440dp"
         android:text="1111111"
-        android:textSize="20sp" />
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/imageView25"
@@ -214,7 +214,7 @@
         android:layout_marginStart="130dp"
         android:layout_marginTop="468dp"
         android:text="4444444"
-        android:textSize="20sp" />
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/imageView26"
@@ -235,7 +235,7 @@
         android:layout_marginStart="130dp"
         android:layout_marginTop="490dp"
         android:text="88888"
-        android:textSize="20sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/htextTotal"
@@ -246,5 +246,5 @@
         android:layout_marginStart="130dp"
         android:layout_marginTop="520dp"
         android:text="9999999"
-        android:textSize="20sp" />
+        android:textSize="14sp" />
 </RelativeLayout>

@@ -1,5 +1,7 @@
 package com.Game.ccmusa.android;
 
+import android.util.Log;
+
 public class ChooseModel
 {
     // string course_name for storing course_name
@@ -14,6 +16,8 @@ public class ChooseModel
         this.course_name = course_name;
         this.imgid = imgid;
         this.lock = lock;
+
+      //  Log.d("Hsieh", "Lock = " + lock);
         this.errid = errid;
     }
 

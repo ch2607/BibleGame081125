@@ -41,7 +41,7 @@ public class GameTableList extends Activity
     String fileType;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // super.onCreate(savedInstanceState);
+        // super.onCreate(savedInstanceState);
         //  super.onBackPressed();
         setContentView(R.layout.activity_listview);
         EasyName = "easy";
@@ -54,7 +54,7 @@ public class GameTableList extends Activity
         level = Main.level;
 
         ListView = (ListView) findViewById(R.id.user_list);
-        
+
         level = 3;
         String fileType;
         if (Main.setcn == false)
@@ -69,7 +69,7 @@ public class GameTableList extends Activity
             Name = sMedName;
 
         }
-      //  super.onCreate(savedInstanceState);
+        //  super.onCreate(savedInstanceState);
         Main.list = new ArrayList<String>();
         // 是否有完過這個遊戲 0.  沒有完過 1. 有錯 2. 全對
 
@@ -85,7 +85,7 @@ public class GameTableList extends Activity
                 //  why name is null  here
                 if (name != null) {
                     sname = name;
-                  //  Log.d("cfh", "sname = " + sname);
+                    //  Log.d("cfh", "sname = " + sname);
                     try {
                         InputStream inputStream = ctx.
                                 openFileInput(sname);
@@ -94,16 +94,16 @@ public class GameTableList extends Activity
                             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, fileType), BUFFER_SIZE);
                             String str = "";
                             while ((str = br.readLine()) != null) {
-                               //   Log.d("cfh", "xx str = " + str);
+                                //   Log.d("cfh", "xx str = " + str);
                                 ret = Integer.parseInt(str);
                                 // 1.   全對
                                 if (ret == 1) {
-                                     //  Log.d("cfh", "xx 1. ret = " + ret + " " + sname);
+                                    //  Log.d("cfh", "xx 1. ret = " + ret + " " + sname);
                                     Main.list.add("1");
                                 } else {
                                     // 2. 有錯
                                     if (ret == 2) {
-                                       //  Log.d("cfh", "xx 2. ret = " + ret + " " + sname);
+                                        //  Log.d("cfh", "xx 2. ret = " + ret + " " + sname);
                                         Main.list.add("2");
                                     }
                                 }
@@ -113,7 +113,7 @@ public class GameTableList extends Activity
 
                     } catch (IOException e) {
                         Main.list.add("0");
-                         Log.e("cfh", "File write failed: " + e.toString());
+                        Log.e("cfh", "File write failed: " + e.toString());
                     } // try
                 }
             }  // for loop 繁體
@@ -122,12 +122,12 @@ public class GameTableList extends Activity
         {
             // 簡體字
             fileType = "UTF-8";
-           // fileType = "Unicode";
+            // fileType = "Unicode";
 
-           for (i = 0; i < 400; i++)
-           {
-               name = "sh" + i + ".txt";
-               sname = name;
+            for (i = 0; i < 400; i++)
+            {
+                name = "sh" + i + ".txt";
+                sname = name;
                 Log.d("cfh", "sname = " + sname);
 
 
@@ -138,21 +138,21 @@ public class GameTableList extends Activity
                         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream,fileType), BUFFER_SIZE);
                         String str = "";
                         // /data/user/0/com.Game.ccmusa.android/files/se0.txt
-                       // Log.d("cfh","Path = "+ ctx.getFileStreamPath(sname));
+                        // Log.d("cfh","Path = "+ ctx.getFileStreamPath(sname));
                         while ((str = br.readLine()) != null) {
                             Log.d("cfh", "簡體字 str = " + str);
 
                             ret = Integer.parseInt(str);
-                        //    ret = Integer.toString(str)
+                            //    ret = Integer.toString(str)
                             // 1. 有錯
 
                             if (ret == 1) {
-                             //   Log.d("cfh", "1. 簡體字 ret = " + ret + " " + sname);
+                                //   Log.d("cfh", "1. 簡體字 ret = " + ret + " " + sname);
                                 Main.list.add("1");
                             } else {
                                 // 2. 全對
                                 if (ret == 2) {
-                                  //  Log.d("cfh", "2. ret = " + ret + " " + sname);
+                                    //  Log.d("cfh", "2. ret = " + ret + " " + sname);
                                     Main.list.add("2");
                                 }
                             }
@@ -167,7 +167,7 @@ public class GameTableList extends Activity
             }  // for loop here
         }
 
-      //  Log.d("cfh", "Main.list.size() " + Main.list.size());
+        //  Log.d("cfh", "Main.list.size() " + Main.list.size());
         ArrayList DataList = getListData();
         Main.L2Text = false;
         Main.L3Text = false;
@@ -175,13 +175,13 @@ public class GameTableList extends Activity
         ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-               // Log.d("cfh", "bef position = " + position);
+                // Log.d("cfh", "bef position = " + position);
                 Main.filenumber = position;  // ? need add number here
                 // Log.d("cfh", "aft position = " + position);
                 ListItem user = (ListItem) ListView.getItemAtPosition(position);
                 Intent n = new Intent(ctx, Game.class);
                 startActivity(n);
-            //    continueButton.setEnabled(false);
+                //    continueButton.setEnabled(false);
 
             }
         });
@@ -197,13 +197,13 @@ public class GameTableList extends Activity
         String fileType;
         if (Main.setcn == false) {
             fileType = "UTF-8";
-           // Log.d("cfh", "214 UTF-8");
+            // Log.d("cfh", "214 UTF-8");
         }
         else {
             fileType = "Unicode";
-           // Log.d("cfh", "218 Unicode");
+            // Log.d("cfh", "218 Unicode");
         }
-       Log.d("cfh", "open file name " + Name);
+        Log.d("cfh", "open file name " + Name);
         try
         {
             InputStream input1 = getAssets().open(Name);  // Name hard.txt
@@ -257,7 +257,7 @@ public class GameTableList extends Activity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-     //  Log.d("CFH", "GameTableList" +  " NewBtn = " + Main.GameBtn);
+        //  Log.d("CFH", "GameTableList" +  " NewBtn = " + Main.GameBtn);
         Intent main = new Intent(ctx, GameLevel.class);
         startActivity(main);
         finish();

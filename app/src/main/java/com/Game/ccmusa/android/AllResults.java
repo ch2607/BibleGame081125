@@ -133,6 +133,7 @@ public class AllResults  extends Activity {
                                     else
                                     {
                                         over++;
+                                        Log.d("cfh", "over = " + over);
                                     }
                                 }
                             }
@@ -361,17 +362,16 @@ public class AllResults  extends Activity {
         {
             easyok = "全部答對經節:" + ok;
             easyerr = "答錯經節:" + err;
-            easyover = "答錯四個字經節" + over;
+            easyover = "答錯四個字經節:" + over;
             easytotal = "尚未完的經節：" + total;
         }
         else
         {
             easyok = "全部答对经节:" + ok;
             easyerr = "答错经节:" + err;
-            easyover = "答錯四個字經節" + over;
+            easyover = "答錯四個字經節:" + over;
             easytotal = "尚未完的經節：" + total;
         }
-
 
         txterr.setTextColor(Color.BLUE);
        txtok.setTextColor(Color.BLUE);

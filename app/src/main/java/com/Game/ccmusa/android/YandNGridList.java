@@ -73,6 +73,10 @@ public class YandNGridList extends Activity
         //
         Main.myArrayYandn = new ArrayList<String>();
         Main.myArrayYandNInf = new ArrayList<String>();
+        Main.error = 0;
+        Main.ok = 0;
+        Main.currentQuestion = 0;
+
         if (Main.setcn == false) {
             fname = "yeasy" + Main.ynum;
         } else {
@@ -116,11 +120,7 @@ public class YandNGridList extends Activity
     }
     public void LoadGameInfo(Context ctx)
     {
-        if (Main.setcn == false) {
-            setContentView(R.layout.yandngridlist);
-        } else {
-            setContentView(R.layout.syandngridlist);
-        }
+        setContentView(R.layout.yandngridlist);
 
         t1 = (TextView) findViewById(R.id.t1);
         t2 = (TextView) findViewById(R.id.t2);
@@ -132,8 +132,8 @@ public class YandNGridList extends Activity
 
 
         if (image == null) {
-            Log.d("cfh", " image is null " + Main.currentQuestion +
-                    " number " + Main.numberOfQuestions);
+            //   Log.d("cfh", " image is null " + Main.currentQuestion +
+            //          " number " + Main.numberOfQuestions);
         } else {
             Glide.with(ctx)
                     .load(R.drawable.mchoose)  // crash here
@@ -156,7 +156,7 @@ public class YandNGridList extends Activity
 
         if (!answered)
         {
-          //  Log.d("cfh", "into !answered");
+            //  Log.d("cfh", "into !answered");
             timeLeftInMillis = COUNTDOWN_IN_MILLIS;
             startCountDown();
         }
@@ -310,20 +310,22 @@ public class YandNGridList extends Activity
                     new OutputStreamWriter(mContext.openFileOutput(sname, Context.MODE_PRIVATE));
             if (Main.error == 0) {
                 outputStreamWriter.write("1");
-             //   Log.d("cfh", "wrie to 1 " + Main.error);
+                //   Log.d("cfh", "wrie to 1 " + Main.error);
             }// OK
             else
             {
                 if (Main.error > 4) {
                     outputStreamWriter.write("3");
-                   // Log.d("cfh", "wrie to 3 " + Main.error);
+                    // Log.d("cfh", "wrie to 3 " + Main.error);
                 }
                 else {
-                  //  Log.d("cfh", "wrie to 2 " + Main.error);
+                    //  Log.d("cfh", "wrie to 2 " + Main.error);
                     outputStreamWriter.write("2");
                 }
             }
             outputStreamWriter.close();
+            Main.error = 0;
+            Main.ok = 0;
         }
         catch (IOException e)
         {
@@ -337,6 +339,7 @@ public class YandNGridList extends Activity
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.gameoversheet);
+        dialog.setCancelable(false);
         TextView title = dialog.findViewById(R.id.title);
         TextView results = dialog.findViewById(R.id.results);
         ImageView image = dialog.findViewById(R.id.image);
@@ -399,16 +402,19 @@ public class YandNGridList extends Activity
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
+        //   Main.error = 0;
+        //   Main.ok = 0;
     }
     public void showDialog(String msg)
     {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottomsheet);
+        dialog.setCancelable(false);
         TextView title = dialog.findViewById(R.id.title);
         TextView results = dialog.findViewById(R.id.results);
-        results.setText(msg);
 
+        //   results.setText(msg);
         results.setGravity(Gravity.CENTER);
         checkAnswer();
         TextView verse = dialog.findViewById(R.id.verse);
@@ -419,6 +425,22 @@ public class YandNGridList extends Activity
         verse.setText(Main.Verse.get(Main.currentQuestion));
         verseno.setText(Main.VerseNo.get(Main.currentQuestion));
         verseno.setGravity(Gravity.CENTER);
+        results.setText(msg);
+        if (Main.screensz == 108)
+        {
+            results.setTextSize(18);
+            verse.setTextSize(18);
+            verseno.setTextSize(18);
+        }
+        else
+        {
+            if (Main.screensz == 72)
+            {
+                results.setTextSize(14);
+                verse.setTextSize(14);
+                verseno.setTextSize(14);
+            }
+        }
         canel.setOnClickListener(new View.OnClickListener()
         {
             @Override

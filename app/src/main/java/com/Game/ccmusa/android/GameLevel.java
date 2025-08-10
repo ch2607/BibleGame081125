@@ -87,17 +87,17 @@ public class GameLevel extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
 
-            case R.id.choose_button:    // Choose
+            case R.id.choose_button:    //  選擇題。 Choose
                 Main.level = 1;
                 Intent e = new Intent(this,GameChooseList.class);
                 startActivity(e);
                 break;
-            case R.id.yandn_button:    // YesandNo
+            case R.id.yandn_button:    // 是非題。 YesandNo
                 Main.level = 2;
                 Intent m = new Intent(this,GameYandNList.class);
                 startActivity(m);
                 break;
-            case R.id.fill_button:  // fill in the blank
+            case R.id.fill_button:  // 填空題。 fill in the blank
                 Main.level = 3;
                 Intent h = new Intent(this,GameTableList.class);
                 startActivity(h);

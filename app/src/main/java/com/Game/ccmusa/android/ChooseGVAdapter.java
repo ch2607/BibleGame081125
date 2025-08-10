@@ -45,6 +45,8 @@ public class ChooseGVAdapter  extends ArrayAdapter<ChooseModel>
         number = listitemView.findViewById(R.id.numid);
         lock = listitemView.findViewById(R.id.lockid);
         error = listitemView.findViewById(R.id.errid);
+     //   Log.d("Hsieh", "number  " + number);
+   //     Log.d("Hsieh", "lock  " + lock);
         switch (position)
         {
             case 0:
@@ -253,7 +255,7 @@ public class ChooseGVAdapter  extends ArrayAdapter<ChooseModel>
             Glide.with(getContext())
                     .load(R.drawable.choose)
                     .into(choose);
-            lock.setVisibility(View.VISIBLE);
+            lock.setVisibility(View.VISIBLE);  // 放上Key Lock  here
             number.setVisibility(View.GONE);
             error.setVisibility(View.GONE);
         }

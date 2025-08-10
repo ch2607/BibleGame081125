@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:background="@color/ligh_green"
         android:text=""
-        android:textSize="25sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/bible_no"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:background="@color/ligh_green"
         android:text=""
-        android:textSize="25sp" />
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/button"

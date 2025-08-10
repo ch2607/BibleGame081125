@@ -153,8 +153,8 @@ public class DiffTableList extends Activity {
 
         //  Log.d("cfh", "Main.list.size() " + Main.list.size());
         ArrayList DataList = getListData();
-        Main.L2Text = false;
-        Main.L3Text = false;
+       Main.L2Text = false;
+       Main.L3Text = false;
         ListView.setAdapter(new CustomListAdapter(this, DataList));
         ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

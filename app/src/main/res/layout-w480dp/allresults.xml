@@ -56,11 +56,11 @@
 
     <TextView
         android:id="@+id/textErrAll"
-        android:layout_width="214dp"
+        android:layout_width="304dp"
         android:layout_height="41dp"
         android:layout_marginStart="130dp"
         android:layout_marginTop="130dp"
-        android:text="答錯八個字經節:"
+        android:text="XXXXXX"
         android:textSize="20sp" />
 
     <TextView
@@ -76,8 +76,8 @@
 
     <TextView
         android:id="@+id/textTotal"
-        android:layout_width="217dp"
-        android:layout_height="37dp"
+        android:layout_width="289dp"
+        android:layout_height="38dp"
         android:layout_marginStart="130dp"
         android:layout_marginTop="155dp"
         android:text="尚未完的經節："
@@ -135,7 +135,7 @@
 
     <TextView
         android:id="@+id/mtextErrAll"
-        android:layout_width="204dp"
+        android:layout_width="305dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="130dp"
         android:layout_marginTop="306dp"
@@ -186,7 +186,7 @@
     <TextView
         android:id="@+id/htextOk"
 
-        android:layout_width="213dp"
+        android:layout_width="304dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -207,7 +207,7 @@
 
     <TextView
         android:id="@+id/htextError"
-        android:layout_width="213dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -228,7 +228,7 @@
 
     <TextView
         android:id="@+id/htextover"
-        android:layout_width="213dp"
+        android:layout_width="305dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -239,7 +239,7 @@
 
     <TextView
         android:id="@+id/htextTotal"
-        android:layout_width="213dp"
+        android:layout_width="304dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"

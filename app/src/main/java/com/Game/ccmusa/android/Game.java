@@ -39,7 +39,7 @@ import static com.Game.ccmusa.android.Main.newButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 public class Game extends AppCompatActivity implements
-                                            SheetDialog.SheetListener
+        SheetDialog.SheetListener
 {
     private static final String TAG = "cfh";
     public static Context context;

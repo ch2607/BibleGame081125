@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.Game.ccmusa.android"
-    android:versionCode="13"
-    android:versionName="2.0">
+    android:versionCode="1"
+    android:versionName="2.3">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" tools:node="remove" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+
         android:maxSdkVersion="19" />
 
     <supports-screens
@@ -20,7 +22,6 @@
         android:clearTaskOnLaunch="true"
         android:label="@string/app_name">
         <activity
-
             android:name="com.Game.ccmusa.android.Main"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
@@ -85,23 +86,19 @@
             android:exported="false"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:label="@string/easy_label"
-            android:name="com.Game.ccmusa.android.ChooseGridList"
+        <activity android:name="com.Game.ccmusa.android.ChooseGridList"
             android:exported="false"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:label="@string/easy_label"
-            android:name="com.Game.ccmusa.android.GameChooseList"
+        <activity android:name="com.Game.ccmusa.android.GameChooseList"
             android:exported="false"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:label="@string/medium_label"
-            android:name="com.Game.ccmusa.android.GameYandNList"
+        <activity android:name="com.Game.ccmusa.android.GameYandNList"
             android:exported="false"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:label="@string/medium_label"
-            android:name="com.Game.ccmusa.android.YandNGridList"
+        <activity android:name="com.Game.ccmusa.android.YandNGridList"
             android:exported="false"
             android:screenOrientation="portrait">
         </activity>

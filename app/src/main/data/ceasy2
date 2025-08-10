@@ -22,7 +22,6 @@
         {
             "Num": "3",
             "Title": "誰說沒有復活的天使，也沒有靈",
-            "kind" :  "sticker",
             "isTrue": true,
             "Answer": "撒都該人",
             "Select": "撒都該人 法利賽人 猶太人",
@@ -78,7 +77,6 @@
         {
             "Num": "9",
             "Title": "便雅憫支派掃羅做王作了多少年？",
-            "kind" :  "sticker",
             "isTrue": true,
             "Answer": "40",
             "Select": "10 50 40",

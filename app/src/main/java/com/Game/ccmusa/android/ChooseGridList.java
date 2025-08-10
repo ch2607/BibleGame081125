@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,7 @@ public class ChooseGridList extends Activity
     private static final long COUNTDOWN_IN_MILLIS = 30000;
     private CountDownTimer countDownTimer;
     private boolean answered;
+    protected String resourceType;
 
     //
     // Call from GameChooseList.java Class
@@ -68,46 +70,58 @@ public class ChooseGridList extends Activity
         super.onCreate(savedInstanceState);
 
         ctx = getApplicationContext();
+        setContentView(R.layout.choosequstion);
         Main.myArrayCh = new ArrayList<String>();
         Main.myArrayChInf = new ArrayList<String>();
+        Main.error = 0;
+        Main.ok = 0;
+        Main.currentQuestion = 0;
+        View rootView = findViewById(android.R.id.content).getRootView();
+        Object tag = rootView.getTag();
 
-            if (Main.setcn == false) {
-                fname = "ceasy" + Main.cnum;
-            } else {
-                fname = "sceasy" + Main.cnum;
-            }
-            answered = false;
-            // StartGame();
-            Log.d("cfh", "read json file " + fname);
-            try {
-                JSONObject obj = new JSONObject(loadJSONFromAsset(fname));
+        if (tag != null) {
+            Log.d("LayoutTag", "目前使用的 layout 是: " + tag.toString());
+        } else {
+            Log.d("LayoutTag", "這個 layout 沒有設定 tag");
+        }
+        if (Main.setcn == false) {
+            fname = "ceasy" + Main.cnum;
+        } else {
+            fname = "sceasy" + Main.cnum;
+        }
+        answered = false;
+        // StartGame();
+        Log.d("cfh", "read json file " + fname);
+        try {
+            JSONObject obj = new JSONObject(loadJSONFromAsset(fname));
 
-                JSONArray jsonArray = obj.optJSONArray("Bible");
-                Boolean flag;
-                String str;
-                int num = 0;
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    num = jsonObject.getInt("Num");
-                    Main.Num.add(i, num);
-                    str = jsonObject.getString("Title");
-                    Main.Titles.add(i, str);
-                    str = jsonObject.getString("Verse");
-                    Main.Verse.add(i, str);
-                    str = jsonObject.getString("Select");
-                    //   Log.d("cfh", "Select " + str);
-                    Main.Select.add(i, str);
-                    str = jsonObject.getString("Answer");
-                    Main.Answer.add(i, str);
-                    str = jsonObject.getString("VerseNo");
-                    Main.VerseNo.add(i, str);
-                }
-            } catch (Exception e) {
-                Log.d("cfh", "error 123");
-                e.printStackTrace();
+            JSONArray jsonArray = obj.optJSONArray("Bible");
+            Boolean flag;
+            String str;
+            int num = 0;
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                num = jsonObject.getInt("Num");
+                Main.Num.add(i, num);
+                str = jsonObject.getString("Title");
+                Main.Titles.add(i, str);
+                str = jsonObject.getString("Verse");
+                Main.Verse.add(i, str);
+                str = jsonObject.getString("Select");
+                //   Log.d("cfh", "Select " + str);
+                Main.Select.add(i, str);
+                str = jsonObject.getString("Answer");
+                Main.Answer.add(i, str);
+                str = jsonObject.getString("VerseNo");
+                Main.VerseNo.add(i, str);
             }
-            Main.filenumber = Main.cnum;
-            LoadGameinfo();
+        } catch (Exception e) {
+            Log.d("cfh", "error 123");
+            e.printStackTrace();
+        }
+        Main.filenumber = Main.cnum;
+        LoadGameinfo();
+        //  Log.d("cfh", "end of LoadGameinfo()");
 
     }
     public  void LoadGameinfo()
@@ -121,6 +135,7 @@ public class ChooseGridList extends Activity
         button1 = (Button) findViewById(R.id.Button1);
         button2 = (Button) findViewById(R.id.Button2);
         button3 = (Button) findViewById(R.id.Button3);
+
 
         if (image == null) {
             Log.d("cfh", " image is null " + Main.currentQuestion +
@@ -156,8 +171,8 @@ public class ChooseGridList extends Activity
         button3.setText(et3);
         button3.setVisibility(View.VISIBLE);
         //   button1.setTextSize(18);
-    //    Log.d("cfh", " current " + Main.currentQuestion +
-    //            " number " + Main.numberOfQuestions + "answered " + answered);
+        //    Log.d("cfh", " current " + Main.currentQuestion +
+        //            " number " + Main.numberOfQuestions + "answered " + answered);
         if (!answered)
         {
             Log.d("cfh", "into !answered");
@@ -166,7 +181,7 @@ public class ChooseGridList extends Activity
         }
         else
         {
-          //  updateCountDownText();
+            //  updateCountDownText();
             showSolution();
         }
 
@@ -197,9 +212,9 @@ public class ChooseGridList extends Activity
                         }
                     }
                 }
-             //   else {
-              //      showNextQuestion();
-              //  }
+                //   else {
+                //      showNextQuestion();
+                //  }
             }
         });
 
@@ -227,9 +242,9 @@ public class ChooseGridList extends Activity
                         }
                     }
                 }
-              //  else {
-              //      showNextQuestion();
-              //  }
+                //  else {
+                //      showNextQuestion();
+                //  }
             }
         });
 
@@ -259,14 +274,14 @@ public class ChooseGridList extends Activity
                         }
                     }
                 }
-            //    else {
-              //      showNextQuestion();
-              //  }
+                //    else {
+                //      showNextQuestion();
+                //  }
             }
         });
 
     }
-/*
+
     @Override
     public void setContentView(int layoutResID) {
         LayoutInflater inflater = getLayoutInflater();
@@ -274,30 +289,31 @@ public class ChooseGridList extends Activity
         resourceType = (String) view.getTag();
         Log.d("cfh", "choose tag = " + resourceType);
 
-    }  */
+    }
+
 
     private void showNextQuestion()
     {
 
         if (Main.currentQuestion < Main.numberOfQuestions)
         {
-           // get next one question  here
+            // get next one question  here
             Main.currentQuestion++;
-            LoadGameinfo();
+            LoadGameinfo(); // Start new Game
             timeLeftInMillis = COUNTDOWN_IN_MILLIS;
             answered = false;
             startCountDown();
         }
         else
         {
-           // if (Main.GameOver == true)
-          //  {
-                GameOverDiaglog();
-          //  }
-          //  else
-          //  {
-           //     finishQuiz();
-           // }
+            // if (Main.GameOver == true)
+            //  {
+            GameOverDiaglog();
+            //  }
+            //  else
+            //  {
+            //     finishQuiz();
+            // }
         }
     }
     private void finishQuiz() {
@@ -312,7 +328,7 @@ public class ChooseGridList extends Activity
             public void onTick(long millisUntilFinished) {
                 timeLeftInMillis = millisUntilFinished;
                 if (!answered)
-                   updateCountDownText();
+                    updateCountDownText();
             }
 
             @Override
@@ -345,9 +361,9 @@ public class ChooseGridList extends Activity
         t2.setGravity(Gravity.CENTER);
 
         if (timeLeftInMillis < 10000) {
-           t2.setTextColor(Color.RED);
+            t2.setTextColor(Color.RED);
         } else {
-           t2.setTextColor(Color.BLUE);
+            t2.setTextColor(Color.BLUE);
         }
     }
 
@@ -357,6 +373,7 @@ public class ChooseGridList extends Activity
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.gameoversheet);
+        dialog.setCancelable(false);
         TextView title = dialog.findViewById(R.id.title);
         TextView results = dialog.findViewById(R.id.results);
         ImageView image = dialog.findViewById(R.id.image);
@@ -424,7 +441,7 @@ public class ChooseGridList extends Activity
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
 
-       // Mark DEL Main.currentQuestion = 0;
+        // Mark DEL Main.currentQuestion = 0;
 
     }
     public void showDialog(String msg)
@@ -432,33 +449,49 @@ public class ChooseGridList extends Activity
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottomsheet);
+        dialog.setCancelable(false);
         TextView title = dialog.findViewById(R.id.title);
         TextView results = dialog.findViewById(R.id.results);
-        results.setText(msg);
+        //   results.setText(msg);
         results.setGravity(Gravity.CENTER);
-        checkAnswer();
-     //   timeLeftInMillis = COUNTDOWN_IN_MILLIS;
-     //   answered = false;
+        checkAnswer();  // stop timer here
+        //   timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+        //   answered = false;
 
         TextView verse = dialog.findViewById(R.id.verse);
         TextView verseno = dialog.findViewById(R.id.verseno);
+        if (Main.screensz == 108)
+        {
+            results.setTextSize(18);
+            verse.setTextSize(18);
+            verseno.setTextSize(18);
+        }
+        else
+        {
+            if (Main.screensz == 72)
+            {
+                results.setTextSize(14);
+                verse.setTextSize(14);
+                verseno.setTextSize(14);
+            }
+        }
         LinearLayout canel = dialog.findViewById(R.id.canel);
         title.setGravity(Gravity.CENTER);
         canel.setGravity(Gravity.CENTER);
         verse.setText(Main.Verse.get(Main.currentQuestion));
         verseno.setText(Main.VerseNo.get(Main.currentQuestion));
         verseno.setGravity(Gravity.CENTER);
-
+        results.setText(msg);
         canel.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-
                 dialog.dismiss();
                 showNextQuestion();
             }
         });
+
         dialog.show();  // crash here
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -508,42 +541,55 @@ public class ChooseGridList extends Activity
                     new OutputStreamWriter(mContext.openFileOutput(sname, Context.MODE_PRIVATE));
             if (Main.error == 0) {
                 outputStreamWriter.write("1");
-                Log.d("cfh", "wrie to 1 " + Main.error);
-            }// OK
+                //   Log.d("cfh", "wrie to 1 " + Main.error);
+            }
             else
             {
                 if (Main.error > 4) {
                     outputStreamWriter.write("3");
-                    Log.d("cfh", "wrie to 3 " + Main.error);
+                    //  Log.d("cfh", "wrie to 3 " + Main.error);
                 }
                 else {
                     Log.d("cfh", "wrie to 2 " + Main.error);
-                    outputStreamWriter.write("2");
+                    //  outputStreamWriter.write("2");
                 }
             }
             outputStreamWriter.close();
+            Main.error = 0;
+            Main.ok = 0;
         }
         catch (IOException e)
         {
             Log.e("cfh Exception", "File write failed: " + e.toString());
         }
     }
+    /*
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Log.d("cfh", "onKeyDown");
+
+            //moveTaskToBack(false);
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    } */
 
     @Override
     protected void onPause() {
         super.onPause();
+        //  Log.d("cfh", "onPause");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //   Log.d("cfh", "onDestroy");
         finish();
-
-
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
-
 
     }
     @Override

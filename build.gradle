@@ -1,24 +1,20 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
-        jcenter()
-        google()
-        mavenCentral()
-        maven {
-            url "https://jitpack.io"
-        }
+        google() // Google 的 Maven 儲存庫 [span_139](start_span)[span_139](end_span)[span_145](start_span)[span_145](end_span)
+        mavenCentral() // Maven Central 儲存庫 [span_140](start_span)[span_140](end_span)[span_146](start_span)[span_146](end_span)
     }
-
-        dependencies {
-            classpath 'com.android.tools.build:gradle:7.0.4'
-
+    dependencies {
+        // 在此處定義 Android Gradle 外掛程式 (AGP) 依賴項。
+        // 請使用最新的穩定版本。AGP 8.4.2 是最新的修補版本之一 [span_151](start_span)[span_151](end_span)。
+        classpath 'com.android.tools.build:gradle:8.4.2' // [span_141](start_span)[span_141](end_span)[span_147](start_span)[span_147](end_span)
+        // 如果需要，在此處新增其他通用的 buildscript 依賴項
     }
 }
 
 allprojects {
     repositories {
-        jcenter()
-        google()
+        google() // Google 的 Maven 儲存庫，適用於所有模組 [span_142](start_span)[span_142](end_span)[span_148](start_span)[span_148](end_span)
+        mavenCentral() // Maven Central 儲存庫，適用於所有模組 [span_143](start_span)[span_143](end_span)[span_149](start_span)[span_149](end_span)
+        // 如果需要，在此處新增所有子專案的其他通用儲存庫
     }
 }
-

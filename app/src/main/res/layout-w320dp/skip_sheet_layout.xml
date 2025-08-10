@@ -14,8 +14,8 @@
         android:layout_height="wrap_content"
         android:background="@color/ligh_green"
         android:text="正確答案"
-        android:textColor="@color/red"
-        android:textSize="25sp" />
+
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/bible_verse"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:background="@color/ligh_green"
         android:text=""
-        android:textSize="25sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/bible_no"
@@ -31,7 +31,7 @@
         android:layout_height="159dp"
         android:background="@color/ligh_green"
         android:text=""
-        android:textSize="25sp" />
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/imageView"

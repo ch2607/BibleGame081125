@@ -4,7 +4,7 @@
     {
         "Num": "1",
         "Title": "聖經最長是哪章?",
-        "isTrue": false,
+        "isTrue": true,
         "Answer": "詩篇",
         "Select": "以賽亞書 詩篇 傳道書",
         "Verse":  "詩篇119篇共計179節",
@@ -13,7 +13,7 @@
     {
         "Num": "2",
         "Title": "聖經第二長是哪卷？",
-         "isTrue": false,
+         "isTrue": true,
         "Answer": "以賽亞書",
         "Select": "傳道書 以賽亞書 何西阿書",
         "Verse": "以賽亞書:1章-66章",

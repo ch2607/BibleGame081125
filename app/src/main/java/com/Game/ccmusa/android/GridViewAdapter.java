@@ -88,6 +88,8 @@ public class GridViewAdapter extends BaseAdapter {
     int TextLen = 0;
     public static Button preButton;
     public static int selbtn = 0;
+    public static boolean L3Text = false; // Level 3 Text
+    public static boolean L2Text = false; // Level 3 Text
     float screen = 12;
     protected String resourceType;
 
@@ -148,9 +150,10 @@ public class GridViewAdapter extends BaseAdapter {
                     button.setTextSize(20);
                     break;
                 case 360: // samsung flip 2  sz 72
-                    sz = (int)(Main.screensz - screen);
-                    button.setLayoutParams(new GridView.LayoutParams(sz, sz));
-                    button.setTextSize(20);
+                 //   sz = (int)(Main.screensz - screen);
+                    sz = (int)(Main.screensz);
+                    button.setLayoutParams(new GridView.LayoutParams(sz,sz));
+                    button.setTextSize(14);
                     break;
                 case 320:  // 1080X1920 note 3
                     sz = (int)(Main.screensz - screen);

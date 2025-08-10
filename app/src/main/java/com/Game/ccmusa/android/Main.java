@@ -1,45 +1,45 @@
 package com.Game.ccmusa.android;
 
-        import android.app.ActionBar;
-        import android.app.Activity;
-        import android.app.AlertDialog;
-        import android.content.Context;
-        import android.content.DialogInterface;
-        import android.content.Intent;
-        import android.content.res.Configuration;
-        import android.graphics.Color;
-        import android.graphics.drawable.ColorDrawable;
-        import android.os.Bundle;
-        import android.util.DisplayMetrics;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.Menu;
-        import android.view.MenuInflater;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.view.View.OnClickListener;
-        import android.widget.Button;
-        import android.widget.ImageView;
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
 
-        import com.bumptech.glide.Glide;
+import com.bumptech.glide.Glide;
 
-        import org.json.JSONArray;
-        import org.json.JSONException;
-        import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-        import java.io.BufferedReader;
-        import java.io.File;
-        import java.io.IOException;
-        import java.io.InputStream;
-        import java.io.InputStreamReader;
-        import java.util.ArrayList;
-        import java.util.List;
-        import java.util.Locale;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class Main extends Activity implements OnClickListener {
 
     private static final String TAG = "Main";
-   // public static View continueButton, newButton, resButton;
+    // public static View continueButton, newButton, resButton;
     public static View  newButton, resButton, helpButton, aboutButton,  retButton;
     public static String fcbtn = "/btn";
     public static String Ctn = "/ctn";
@@ -73,6 +73,7 @@ public class Main extends Activity implements OnClickListener {
     public static List<String> myArrayInfo;
     public static int level = 3;
     public static int saveindx = 0;
+    public static int internet = 0;
     public static int saveerr = 0;
     public static int ok = 0;
     public static int error = 0;
@@ -96,7 +97,7 @@ public class Main extends Activity implements OnClickListener {
     public  enum WindowSizeClass { COMPACT, MEDIUM, EXPANDED}
 
 
-  //  public static ArrayList<Bible> Bibles = new ArrayList<Bible>();
+    //  public static ArrayList<Bible> Bibles = new ArrayList<Bible>();
 
     /**
      * Called when the activity is first created.
@@ -119,7 +120,8 @@ public class Main extends Activity implements OnClickListener {
         dens = dm.densityDpi;
         screensz = w / 10;
 
-    //  final Animation animTranslate = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
+
+        //  final Animation animTranslate = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
         Log.d("CFH", "screen = " + screensz + " dm = " + dens + " w = " + w/10);
 
         if (setcn == false)
@@ -183,9 +185,9 @@ public class Main extends Activity implements OnClickListener {
                 startActivity(n);
                 Main.GameBtn = true;
                 break;
-           case   R.id.help_button:
+            case   R.id.help_button:
                 Intent h = new Intent(this, HelpGame.class);
-               startActivity(h);
+                startActivity(h);
                 break;
             case R.id.results_button:
                 Intent r = new Intent(this, AllResults.class);
@@ -229,17 +231,17 @@ public class Main extends Activity implements OnClickListener {
                     getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
                     this.setContentView(R.layout.main);
 
-                  newButton = findViewById(R.id.new_button);
-                  newButton.setOnClickListener(this);
-                   helpButton = findViewById(R.id.help_button);
+                    newButton = findViewById(R.id.new_button);
+                    newButton.setOnClickListener(this);
+                    helpButton = findViewById(R.id.help_button);
                     helpButton.setOnClickListener(this);
                     resButton = findViewById(R.id.results_button);
                     resButton.setOnClickListener(this);
                     aboutButton = findViewById(R.id.about_button);
                     aboutButton.setOnClickListener(this);
 
-                    }
-                    setcn = true;
+                }
+                setcn = true;
                 biblegif = (ImageView) findViewById(R.id.imageView);
                 Glide.with(this).load(R.drawable.ez050923).into(biblegif);
 
