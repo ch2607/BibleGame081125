@@ -46,39 +46,42 @@
             android:layout_width="100dp"
             android:layout_height="52dp"
             android:layout_marginTop="4dp"
-            android:layout_weight="1"
             android:background="#2196F3"
             android:fontFamily="casual"
-            android:textColor="#fff"
+            android:text="Button 1"
+            android:textColor="#FFFFFF"
             app:layout_constraintTop_toBottomOf="@+id/image"
-            tools:layout_editor_absoluteX="7dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/Button2" />
 
         <Button
             android:id="@+id/Button2"
             android:layout_width="100dp"
             android:layout_height="52dp"
             android:layout_marginTop="4dp"
-            android:layout_weight="1"
-            android:background="#2196F3"
+            android:background="#1976D2"
+            android:textColor="#FFFFFF"
             android:fontFamily="casual"
-            android:textColor="#fff"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image" />
+            android:text="Button 2"
+
+            app:layout_constraintTop_toBottomOf="@+id/image"
+            app:layout_constraintStart_toEndOf="@id/Button1"
+            app:layout_constraintEnd_toStartOf="@id/Button3"
+            app:layout_constraintHorizontal_chainStyle="spread" />
 
         <Button
             android:id="@+id/Button3"
             android:layout_width="100dp"
             android:layout_height="52dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
-            android:layout_weight="1"
-            android:background="#2196F3"
+            android:background="#1976D2"
+            android:textColor="#FFFFFF"
             android:fontFamily="casual"
-            android:textColor="#fff"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image" />
+            android:text="Button 3"
+            app:layout_constraintTop_toBottomOf="@+id/image"
+            app:layout_constraintStart_toEndOf="@id/Button2"
+            app:layout_constraintEnd_toEndOf="parent" />
+
 
         <TextView
             android:id="@+id/t3"

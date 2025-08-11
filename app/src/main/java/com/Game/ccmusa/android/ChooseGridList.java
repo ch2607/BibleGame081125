@@ -77,13 +77,13 @@ public class ChooseGridList extends Activity
         Main.ok = 0;
         Main.currentQuestion = 0;
         View rootView = findViewById(android.R.id.content).getRootView();
-        Object tag = rootView.getTag();
+     /*   Object tag = rootView.getTag();
 
         if (tag != null) {
             Log.d("LayoutTag", "目前使用的 layout 是: " + tag.toString());
         } else {
             Log.d("LayoutTag", "這個 layout 沒有設定 tag");
-        }
+        }  */
         if (Main.setcn == false) {
             fname = "ceasy" + Main.cnum;
         } else {
@@ -124,9 +124,13 @@ public class ChooseGridList extends Activity
         //  Log.d("cfh", "end of LoadGameinfo()");
 
     }
+
     public  void LoadGameinfo()
     {
         setContentView(R.layout.choosequstion);
+        View rootView = findViewById(android.R.id.content).getRootView();
+        resourceType = (String) rootView.getTag();
+        Log.d("cfh", "choose tag = " + resourceType);
         t1 = (TextView) findViewById(R.id.t1);
         t2 = (TextView) findViewById(R.id.t2);
         t3 = (TextView) findViewById(R.id.t3);
@@ -281,7 +285,7 @@ public class ChooseGridList extends Activity
         });
 
     }
-
+/*
     @Override
     public void setContentView(int layoutResID) {
         LayoutInflater inflater = getLayoutInflater();
@@ -289,7 +293,7 @@ public class ChooseGridList extends Activity
         resourceType = (String) view.getTag();
         Log.d("cfh", "choose tag = " + resourceType);
 
-    }
+    }  */
 
 
     private void showNextQuestion()
